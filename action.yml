@@ -29,7 +29,7 @@ inputs:
   commit-name:
     description: 'Name to use for the commit'
     required: true
-  commit-mesage:
+  commit-message:
     description: 'Message to use for the commit'
     required: true
 
