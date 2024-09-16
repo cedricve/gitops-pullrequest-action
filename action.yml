@@ -23,9 +23,6 @@ inputs:
   gitops-value:
     description: 'Value of key to be modified'
     required: true
-  changes-by-file:
-    description: 'JSON object with changes to make, by file as key'
-    required: true
   commit-email:
     description: 'Email address to use for the commit'
     required: true
