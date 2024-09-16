@@ -55,6 +55,7 @@ runs:
       valueFile: ${{ inputs.gitops-file }}
       propertyPath: ${{ inputs.gitops-key }}
       value: ${{ inputs.gitops-value }}
+      token: ${{ inputs.github-token }}
   - name: Push changes
     shell: bash
     run: |
