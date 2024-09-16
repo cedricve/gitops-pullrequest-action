@@ -1,20 +1,21 @@
 # GitOps action for updating a GitOps repository through a pull request
 
-This action updates a gitops repository with the latest version of the application.
+This action allows to create a pull request on a remote GitOps repository. 
+
 Example usage:
 
 ```yaml
 steps:
-- name: Update GitOps Repository
-  uses: maderelevant/update-gitops-action@master
+- name: Create GitOps Pull Request
+  uses: cedricve/gitops-pullrequest-action@master
   with:
     ssh-key: ${{ secrets.SECRET_WITH_SSH_KEY }}
-    gitops-repo: your-org/app-gitops
-    commit-email: "gitops@your-org.com"
+    gitops-repo: "uug-ai/gitops"
+    gitops-pr-branch: "release-hub-frontend-v1.0.1"
+    gitops-file: "environments/staging/kerberos-hub/values.yaml"
+    gitops-key: "kerberoshub.frontend.tag"
+    gitops-value: "v1.0.1"
+    commit-email: "gitops@uug.ai"
     commit-name: "GitOps"
-    changes-by-file: |
-      {"path/to/file.yaml" : {
-        "serviceA.image": "${{ inputs.yourImage }}",
-        "serviceB.image": "${{ inputs.your2ndImage }}"
-      }}
+    commit-mesage: "A new release for Kerberos Hub v1.0.1"
 ```
