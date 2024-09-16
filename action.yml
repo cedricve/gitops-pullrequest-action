@@ -1,5 +1,5 @@
-name: 'Update GitOps repo'
-description: 'Used for updating a gitops repo with new image(s)'
+name: 'GitOps Pull Request'
+description: 'Used for updating a GitOps repo with new image(s)'
 inputs:
   ssh-key:
     description: 'SSH key that has read/write access to the GitOps repo'
@@ -11,6 +11,18 @@ inputs:
     description: 'GitOps repo branch to update'
     required: true
     default: 'master'
+  gitops-pr-branch:
+    description: 'GitOps branch to be created'
+    required: true 
+  gitops-file:
+    description: 'File to be modified'
+    required: true
+  gitops-key:
+    description: 'Key to be modified'
+    required: true
+  gitops-value:
+    description: 'Value of key to be modified'
+    required: true
   changes-by-file:
     description: 'JSON object with changes to make, by file as key'
     required: true
@@ -19,6 +31,9 @@ inputs:
     required: true
   commit-name:
     description: 'Name to use for the commit'
+    required: true
+  commit-mesage:
+    description: 'Message to use for the commit'
     required: true
 
 runs:
@@ -32,19 +47,20 @@ runs:
       path: gitops
   - uses: fjogeleit/yaml-update-action@main
     with:
-      branch: master
+      branch: deployment/${{ inputs.gitops-branch }}
       targetBranch: master
+      createPR: true
       repository: ${{ inputs.gitops-repo }}
-      createPR: false
-      commitChange: false
-      message: "Repo ${{ github.event.repository.name }} published ${{ github.event.head_commit.message || github.event.release.tag_name }} by ${{ github.actor.login }}"
+      message: ${{ inputs.commit-message }}
       workDir: gitops
-      changes: ${{ inputs.changes-by-file }}
+      valueFile: ${{ inputs.gitops-file }}
+      propertyPath: ${{ inputs.gitops-key }}
+      value: ${{ inputs.gitops-value }}
   - name: Push changes
     shell: bash
     run: |
       cd gitops
       git config --global user.email "${{ inputs.commit-email }}"
       git config --global user.name "${{ inputs.commit-name }}"
-      git commit -am "${{ github.event.head_commit.message }}"
+      git commit -am "${{ inputs.commit-message }}"
       git push
