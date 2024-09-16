@@ -45,7 +45,7 @@ runs:
   - uses: fjogeleit/yaml-update-action@main
     with:
       branch: deployment/${{ inputs.gitops-pr-branch }}
-      targetBranch: master
+      targetBranch: main
       createPR: true
       repository: ${{ inputs.gitops-repo }}
       message: ${{ inputs.commit-message }}
