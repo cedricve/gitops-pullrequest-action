@@ -1,8 +1,8 @@
 name: 'GitOps Pull Request Action'
 description: 'Used for updating a GitOps repo with new image(s)'
 inputs:
-  ssh-key:
-    description: 'SSH key that has read/write access to the GitOps repo'
+  github-token:
+    description: 'GitHub token'
     required: true
   gitops-repo:
     description: 'GitOps repo to update'
@@ -40,7 +40,7 @@ runs:
     uses: actions/checkout@v3
     with:
       repository: ${{ inputs.gitops-repo }}
-      ssh-key: ${{ inputs.ssh-key }}
+      token: ${{ inputs.github-token }}
       path: gitops
   - uses: fjogeleit/yaml-update-action@main
     with:
