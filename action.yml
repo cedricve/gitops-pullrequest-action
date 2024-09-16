@@ -1,4 +1,4 @@
-name: 'GitOps Pull Request'
+name: 'GitOps Pull Request Action'
 description: 'Used for updating a GitOps repo with new image(s)'
 inputs:
   ssh-key:
