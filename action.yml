@@ -44,7 +44,7 @@ runs:
       path: gitops
   - uses: fjogeleit/yaml-update-action@main
     with:
-      branch: deployment/${{ inputs.gitops-branch }}
+      branch: deployment/${{ inputs.gitops-pr-branch }}
       targetBranch: master
       createPR: true
       repository: ${{ inputs.gitops-repo }}
