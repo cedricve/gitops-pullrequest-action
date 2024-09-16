@@ -1,4 +1,4 @@
-# GitOps action for updating a gitops repository
+# GitOps action for updating a GitOps repository through a pull request
 
 This action updates a gitops repository with the latest version of the application.
 Example usage:
