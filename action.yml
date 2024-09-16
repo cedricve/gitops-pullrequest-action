@@ -44,15 +44,22 @@ runs:
       path: gitops
   - uses: fjogeleit/yaml-update-action@main
     with:
-      branch: deployment/${{ inputs.gitops-pr-branch }}
-      targetBranch: main
-      createPR: false
-      repository: ${{ inputs.gitops-repo }}
-      message: ${{ inputs.commit-message }}
+      #branch: deployment/${{ inputs.gitops-pr-branch }}
+      #targetBranch: main
+      #createPR: false
+      #repository: ${{ inputs.gitops-repo }}
+      #message: ${{ inputs.commit-message }}
       workDir: gitops
-      valueFile: ${{ inputs.gitops-file }}
-      propertyPath: ${{ inputs.gitops-key }}
-      value: ${{ inputs.gitops-value }}
+      #valueFile: ${{ inputs.gitops-file }}
+      #propertyPath: ${{ inputs.gitops-key }}
+      #value: ${{ inputs.gitops-value }}
+      valueFile: 'deployment/helm/values.yaml'
+      propertyPath: 'backend.version'
+      value: 'test'
+      branch: deployment/test
+      targetBranch: development
+      createPR: true
+      message: 'Update Image Version to'
   - name: Push changes
     shell: bash
     run: |
