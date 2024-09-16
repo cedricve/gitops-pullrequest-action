@@ -46,7 +46,7 @@ runs:
     with:
       branch: deployment/${{ inputs.gitops-pr-branch }}
       targetBranch: main
-      #createPR: true
+      createPR: false
       repository: ${{ inputs.gitops-repo }}
       message: ${{ inputs.commit-message }}
       workDir: gitops
