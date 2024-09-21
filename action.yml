@@ -49,7 +49,7 @@ runs:
       targetBranch: main
       masterBranchName: main
       createPR: true
-      commitChange: false
+      commitChange: true
       repository: ${{ inputs.gitops-repo }}
       message: ${{ inputs.commit-message }}
       workDir: gitops
