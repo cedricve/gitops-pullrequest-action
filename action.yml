@@ -57,11 +57,3 @@ runs:
       propertyPath: ${{ inputs.gitops-key }}
       value: ${{ inputs.gitops-value }}
       token: ${{ inputs.github-token }}
-  - name: Push changes
-    shell: bash
-    run: |
-      cd gitops
-      git config --global user.email "${{ inputs.commit-email }}"
-      git config --global user.name "${{ inputs.commit-name }}"
-      git commit -am "${{ inputs.commit-message }}"
-      git push
